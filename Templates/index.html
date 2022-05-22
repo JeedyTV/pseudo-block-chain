@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Key Chain Interface</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='favicon-16x16.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename='favicon-32x32.png')}}">
+</head>
+
+<body>
+    <header>
+        <br>
+        <p align="center"><iframe src="https://giphy.com/embed/3o7WIB00yXujVt4WEo" width="200" height="200" frameBorder="0"></iframe></p>
+    </header>
+
+    <div class="flex-container">
+        <div class="left">
+            <form action="" method="post">
+                <input autocomplete="off" placeholder="Key" type="text" name="key"><br>
+                <input autocomplete="off" placeholder="Value" type="text" name="value"><br>
+                <input type="checkbox" name="callback">
+                <label for="callback"> Callback </label>
+                <input class="button" type="submit" name="s" value="ADD A TRANSACTION">
+            </form>
+            <br>
+            <form action="" method="post">
+                <input autocomplete="off" type="text" placeholder="Key" name="key" value="">
+                <input class="button" type="submit" name="RETRIEVE" value="RETRIEVE">
+            </form>
+            <br>
+            <form action="" method="post">
+                <input autocomplete="off" type="text" placeholder="Key" id="fname" name="key" value="">
+                <input class="button" type="submit" name="RETRIEVE ALL" value="RETRIEVE ALL">
+            </form>
+            <br>
+
+            <form action="" method="post">
+                <input class="button" type="submit" name="NETWORK" value="SHOW THE NETWORK">
+            </form>
+        </div>
+        <div class="right">
+            {% if p %}
+            <p>User has peers :</p>
+            {% for peer in p %}
+            <li>{{ peer }}</li>
+            {% endfor %} {% endif %} {% if retrieve_key %}
+            <p>The latest value for the specified key is </p>
+            <b>{{ retrieve_key[0] }}</b>
+            <p>added by {{ retrieve_key[1] }} at {{ retrieve_key[2] }} </p>
+            {% endif %} {%if No_value%}
+            <p>There is no value associate to the key "{{ No_value }}".</p>
+            {% endif %} {%if message %}
+            <p>{{ message }}</p>
+            {% endif %} {%if noPeer %}
+            <p>There is no peers in the network.</p> {% endif %} {% if retrieve_keys %}
+            <p>The values for the specified key are</p>
+            <ol>
+                {% for key in retrieve_keys %}
+                <li> "{{ key[0] }}" from {{ key[1] }} at {{ key[2] }} </li>
+
+                {% endfor %} {% endif %}
+            </ol>
+        </div>
+    </div>
+</body>
+
+</html>
